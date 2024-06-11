@@ -1,13 +1,15 @@
 <?php
 
-class Tickets extends Controller{
+class Tickets extends Controller
+{
     /**
      * Cette méthode affiche la liste des Tickets
      *
      *
      * @return void
      */
-    public function index(int $no_page=1){
+    public function index(int $no_page = 1)
+    {
         $this->page(1);
     }
 
@@ -17,35 +19,36 @@ class Tickets extends Controller{
      *
      * @return void
      */
-    public function page(int $no_page=1){
+    public function page(int $no_page = 1)
+    {
         // On instancie le modèle "Ticket"
         $this->loadModel('Ticket');
 
         // Recherche du nombre de TICKETS
         $nb_total_ticket = $tickets = $this->Ticket->get_nb_ticket();
-        
+
         // Calcul du dernier N° PAGE
         $last_no_page = ceil($nb_total_ticket / PAGE_SIZE); // On arrondi au dessus
- 
+
 
         // N° Page MINI
         if ($no_page < 0) {
-            $no_page=1;
+            $no_page = 1;
         }
 
         // N0 Page MAXI
         if ($no_page >  $last_no_page) {
             $no_page = $last_no_page;
-        } 
+        }
 
- 
 
-        $offset = ($no_page - 1)* PAGE_SIZE;
-        $nb_lignes =  PAGE_SIZE;     
-        
+
+        $offset = ($no_page - 1) * PAGE_SIZE;
+        $nb_lignes =  PAGE_SIZE;
+
         // Calcul du N° Page PRECEDENT
         if ($no_page == 1) {
-            $no_page_prec =1;
+            $no_page_prec = 1;
         } else {
             $no_page_prec = $no_page - 1;
         }
@@ -79,7 +82,8 @@ class Tickets extends Controller{
      * @param  int $no
      * @return void
      */
-    public function modif(int $annee, int $no){
+    public function modif(int $annee, int $no)
+    {
         // On instancie le modèle "Ticket"
         $this->loadModel('Ticket');
 
@@ -89,7 +93,7 @@ class Tickets extends Controller{
             'ANNEE' => $annee,
             'NUMERO_TICKET' => $no
         );
-         // On stocke le ticket que l'on souhaite modifier dans $ticket
+        // On stocke le ticket que l'on souhaite modifier dans $ticket
         $ticket = $this->Ticket->getOne();
         // $ticket['DATE_VENTE'] =  str_replace(' ', 'T', $ticket['DATE_VENTE']);
         // echo $ticket['DATE_VENTE'];
@@ -98,7 +102,7 @@ class Tickets extends Controller{
         $this->loadModel('Vendre');
 
         // On stocke les tickets dans $tickets
-        $lignes = $this->Vendre->getOne_all_lines_with_articles( $annee,  $no);
+        $lignes = $this->Vendre->getOne_all_lines_with_articles($annee,  $no);
 
 
         // On envoie les données à la vue modif
@@ -113,7 +117,8 @@ class Tickets extends Controller{
      * @param  int $num
      * @return void
      */
-    public function modif_sauve(int $annee, int $num){
+    public function modif_sauve(int $annee, int $num)
+    {
 
         // On recupère les données envoyées par le formulaire
         // $annee = $_REQUEST['Annee'];
@@ -129,7 +134,7 @@ class Tickets extends Controller{
         // On redirige vers la liste
         // // On stocke les tickets dans $tickets
         // $tickets = $this->Ticket->getAll("ANNEE DESC, NUMERO_TICKET DESC");
-        
+
         // $message = "Ticket bien modifié";
         // $type_message = "success";
         // // On envoie les données à la vue index
@@ -146,7 +151,8 @@ class Tickets extends Controller{
      * @param  int $num
      * @return void
      */
-    public function suppr(int $annee, int $num){
+    public function suppr(int $annee, int $num)
+    {
 
         // On instancie le modèle "Ticket"
         $this->loadModel('Ticket');
@@ -157,9 +163,9 @@ class Tickets extends Controller{
             'ANNEE' => $annee,
             'NUMERO_TICKET' => $num
         );
- 
 
-         // On stocke le ticket que l'on souhaite modifier dans $ticket
+
+        // On stocke le ticket que l'on souhaite modifier dans $ticket
         $ticket = $this->Ticket->getOne();
 
         // On envoie les données à la vue modif
@@ -174,7 +180,8 @@ class Tickets extends Controller{
      * @param  int $num
      * @return void
      */
-    public function suppr_sauve(int $annee, int $num){
+    public function suppr_sauve(int $annee, int $num)
+    {
 
         // On instancie le modèle "Ticket"
         $this->loadModel('Ticket');
@@ -185,7 +192,7 @@ class Tickets extends Controller{
         // On redirige vers la liste
         // On stocke les tickets dans $tickets
         // $tickets = $this->Ticket->getAll("ANNEE DESC, NUMERO_TICKET DESC");
-        
+
         // $message = "Ticket bien supprimé";
         // $type_message = "success";
         // // On envoie les données à la vue index
@@ -199,7 +206,8 @@ class Tickets extends Controller{
      * @param  void
      * @return void
      */
-    public function ajout(){
+    public function ajout()
+    {
         // On affiche le formulaire
         $this->render('ajout', array());
     }
@@ -210,7 +218,8 @@ class Tickets extends Controller{
      * @param  void
      * @return void
      */
-    public function ajout_sauve(){
+    public function ajout_sauve()
+    {
 
         // On recupère les données envoyées par le formulaire
         $annee = $_REQUEST['Annee'];
@@ -225,7 +234,7 @@ class Tickets extends Controller{
         // On redirige vers la liste
         // // On stocke les tickets dans $tickets
         // $tickets = $this->Ticket->getAll("ANNEE DESC, NUMERO_TICKET DESC");
-        
+
         // $message = "Ticket bien Ajouté";
         // $type_message = "success";
         // // On envoie les données à la vue index
@@ -234,9 +243,8 @@ class Tickets extends Controller{
         // $this->index();
 
         // On redirige vers la modification des lignes du Ticket
-        $new_num =  $this->Ticket->get_num_max($annee);
+        $new_num =  $this->Ticket->get_num_max($annee) - 1;
         $retour = PATH . "/vendres/index/$annee/$new_num";
         header('Location: ' . $retour);
-
     }
 }
