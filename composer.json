@@ -1,0 +1,12 @@
+{
+    "name": "99ar019/mvc_tuto_youtube_exmple_sdbm_complet",
+    "authors": [
+        {
+            "name": "vao49",
+            "email": "fbrc.le.blanc@gmail.com"
+        }
+    ],
+    "require": {
+        "spipu/html2pdf": "^5.2"
+    }
+}
