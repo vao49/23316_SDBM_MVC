@@ -1,4 +1,4 @@
-<h1>Liste des Continents Modif</h1>
+<h1>Liste des Continents</h1>
 
 <a href="<?= PATH ?>/continents/ajout"><button type='button'
         class='btn btn-primary bi bi-plus-circle'>&nbsp;Ajouter</button></a><br />
