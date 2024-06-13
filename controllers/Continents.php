@@ -1,7 +1,8 @@
 <?php
 
-class Continents extends Controller{
-    
+class Continents extends Controller
+{
+
 
     /**
      * Cette méthode affiche la liste des Continents
@@ -9,9 +10,10 @@ class Continents extends Controller{
      *
      * @return void
      */
-    public function index() {
+    public function index()
+    {
         // On instancie le modèle "Continent"
-        
+
         $this->loadModel('Continent');
         // On stocke les continent dans $continents
         $continents = $this->Continent->getAll();
@@ -29,7 +31,8 @@ class Continents extends Controller{
      * @param  int $id
      * @return void
      */
-    public function modif(int $id){
+    public function modif(int $id)
+    {
         // On instancie le modèle "Continent"
         $this->loadModel('Continent');
 
@@ -50,7 +53,8 @@ class Continents extends Controller{
      * @param  int $id
      * @return void
      */
-    public function modif_sauve(int $id){
+    public function modif_sauve(int $id)
+    {
 
         // On recupère les données envoyées par le formulaire
         $id = $_REQUEST['Id'];
@@ -65,7 +69,7 @@ class Continents extends Controller{
         // On redirige vers la liste
         // On stocke les continent dans $continents
         $continents = $this->Continent->getAll();
-        
+
         $message = "Continent bien modifié";
         $type_message = "success";
         // On envoie les données à la vue index
@@ -79,7 +83,8 @@ class Continents extends Controller{
      * @param  int $id
      * @return void
      */
-    public function suppr(int $id){
+    public function suppr(int $id)
+    {
         // On instancie le modèle "Continent"
         $this->loadModel('Continent');
 
@@ -100,7 +105,8 @@ class Continents extends Controller{
      * @param  int $id
      * @return void
      */
-    public function suppr_sauve(int $id){
+    public function suppr_sauve(int $id)
+    {
 
         // On recupère les données envoyées par le formulaire
         $id = $_REQUEST['Id'];
@@ -114,7 +120,7 @@ class Continents extends Controller{
         // On redirige vers la liste
         // On stocke les continent dans $continents
         $continents = $this->Continent->getAll();
-        
+
         $message = "Continent bien supprimé";
         $type_message = "success";
         // On envoie les données à la vue index
@@ -127,7 +133,8 @@ class Continents extends Controller{
      * @param  void
      * @return void
      */
-    public function ajout(){
+    public function ajout()
+    {
         // On affiche le formulaire
         $this->render('ajout', array());
     }
@@ -139,7 +146,8 @@ class Continents extends Controller{
      * @param  void
      * @return void
      */
-    public function ajout_sauve(){
+    public function ajout_sauve()
+    {
 
         // On recupère les données envoyées par le formulaire
         $nom = $_REQUEST['Nom'];
@@ -153,7 +161,7 @@ class Continents extends Controller{
         // On redirige vers la liste
         // On stocke les continent dans $continents
         $continents = $this->Continent->getAll();
-        
+
         $message = "Continent bien Ajouté";
         $type_message = "success";
         // On envoie les données à la vue index
